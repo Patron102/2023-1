@@ -1,10 +1,9 @@
 #2023.03.23.뻘짓
-"""
 import random as r
 n = 0
 d = 0
 
-result = list()
+result = []
 
 while True:
     d = int(input("시뮬레이션 할 횟수 : "))
@@ -25,9 +24,8 @@ while True:
 m = max(result)
 print("가장 많이 던진 횟수 : ", m)
 print("시뮬레이션을 종료합니다.")
-"""
-#d2023.03.28. 뻘짓2
-"""
+
+#2023.03.28. 뻘짓2
 while True:
     mid = int(input("중간고사 성적 입력 : "))
     if mid > 100 or mid < 0:
@@ -58,5 +56,5 @@ while True:
         print("4반")
     if tot_1 == 9 or tot_1 == 0:
         print("5반")
-"""
+
 #2023.
