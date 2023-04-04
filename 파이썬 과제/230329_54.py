@@ -75,7 +75,7 @@ print("11:", nList)
 import random as r
 
 ma = 0
-mi = 0
+mi = 100
 d = 0
 mList = []
 for x in range(100):
@@ -84,9 +84,16 @@ for x in range(100):
 
 for v in range(len(mList)):
 	d += mList[v]
+	
+for w in range(len(mList)):
+	if mList[w] > ma :
+		ma = mList[w]
+	if mList[w] < mi :
+		mi = mList[w]
+
 
 print("16:", mList)
-print("최고 :","점,","최하 : ","점,", "평균 :", d/len(mList))
+print("최고 :",ma,"점,","최하 : ",mi,"점,", "평균 :", d/len(mList))
 
 
 
