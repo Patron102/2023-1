@@ -1,4 +1,4 @@
-#이아현 교수님
+#이아현 교수님1
 x = 20
 y = 10
 
@@ -19,6 +19,29 @@ for i in range(y):
     idx += 1
     if i != y-1:
         print("")
+
+
+#이아현 교수님2
+x = 20
+y = 10
+
+def printList(a, i):
+	for _ in range(len(a)):
+		print(a[i], end = " ")
+
+		i += 1 
+		if i >= len(a):
+			i = 0
+
+
+xList = [i for i in range(1, x+1, 1)]
+idx = 0
+
+for i in range(y):
+	printList(xList, idx)
+	idx += 1
+	if i != y-1:
+		print("")
 
 
 #민서홍1
