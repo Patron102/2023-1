@@ -3,6 +3,8 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk, ImageFilter, ImageEnhance, ImageOps
 
+#변수가 치세인 이유는 테스트할때 사용한 사진이 치세이기 떄문이다.
+
 ##################################
 def WhatName(num):
 	global imgName, nchise, chise
@@ -37,7 +39,7 @@ def WhatName(num):
 	elif num == 8:
 		nchise = chise.filter(ImageFilter.CONTOUR)
 
-	#tk_chise = ImageTk.PhotoImage(f"image_converter/{imgName}")
+	#tk_chise = ImageTk.PhotoImage(f"image_converter/{imgName}") 라벨로 교체해도 될듯?
 	#canvas.create_image(565, 565, image=tk_chise)
 	nchise.save(f"image_converter/{imgName}")
 	chise = nchise
