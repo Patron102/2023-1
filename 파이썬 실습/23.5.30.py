@@ -49,6 +49,7 @@ def func_zoomin() :
     outPhoto = outPhoto.resize((int(inX * scale), int(inY * scale)))
     outX = outPhoto.width
     outY = outPhoto.height
+    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #축소
