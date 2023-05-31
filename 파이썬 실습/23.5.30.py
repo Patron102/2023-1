@@ -19,7 +19,7 @@ def displayPhoto(img, width, height) :
 
 #파일 열기
 def func_open() :     
-    global root, cnavas, inPhoto, outPhoto, inX, inY
+    global root, cnavas, inPhoto, outPhoto, inX, inY, outX, outY
     filename = askopenfilename(parent=root, filetypes=(("모든 그림 파일", "*.jpg;*.jpeg;*.bmp;*.png;*.tif"), ("모든 파일", "*.*")))
     inPhoto = Image.open(filename)
     inX = inPhoto.width
@@ -44,42 +44,36 @@ def func_exit() :
 
 #확대
 def func_zoomin() :      
-    global root, canvas, inPhoto, outPhoto, inX, inY
+    global root, canvas, inPhoto, outPhoto, inX, inY, outX, outY
     scale = askinteger("확대배수", "확대할 배수를 입력하세요", minvalue=2, maxvalue=8)
-    outPhoto = outPhoto.resize((int(inX * scale), int(inY * scale)))
+    outPhoto = outPhoto.resize((int(outX * scale), int(outY * scale)))
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #축소
 def func_zoomout() :    
-    global root, canvas, inPhoto, outPhoto, inX, inY
+    global root, canvas, inPhoto, outPhoto, inX, inY, outX, outY
     scale = askinteger("축소배수", "축소할 배수를 입력하세요", minvalue=2, maxvalue=8)
-    outPhoto = outPhoto.resize((int(inX / scale), int(inY / scale)))
+    outPhoto = outPhoto.resize((int(outX / scale), int(outY / scale)))
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #상하 반전
 def func_mirror1() :    
     global root, canvas, inPhoto, outPhoto, inX, inY
-    outPhoto = inPhoto.copy()
     outPhoto = outPhoto.transpose(Image.FLIP_TOP_BOTTOM)
     outX = outPhoto.width   
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #좌우 반전
 def func_mirror2() :      
     global root, canvas, inPhoto, outPhoto, inX, inY
-    outPhoto = inPhoto.copy()
     outPhoto = outPhoto.transpose(Image.FLIP_LEFT_RIGHT)
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #회전
@@ -89,68 +83,58 @@ def func_rotate() :
     outPhoto = outPhoto.rotate(degree, expand=True)
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #밝게/어둡게
 def func_bright() :      
     global root, canvas, inPhoto, outPhoto, inX, inY
     value = askfloat("밝기 조절", "값을 입력하세요(0.0~5.0)", minvalue=0.0, maxvalue=5.0)
-    outPhoto = inPhoto.copy()
     outPhoto = ImageEnhance.Brightness(outPhoto).enhance(value)
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #엠보싱
 def func_embos() :       
     global root, canvas, inPhoto, outPhoto, inX, inY
-    outPhoto = inPhoto.copy()
     outPhoto = outPhoto.filter(ImageFilter.EMBOSS)
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #블러링
 def func_blur() :        
     global root, canvas, inPhoto, outPhoto, inX, inY
-    outPhoto = inPhoto.copy()
     outPhoto = outPhoto.filter(ImageFilter.BLUR)
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #연필스케치
 def func_sketch() :  
     global root, canvas, inPhoto, outPhoto, inX, inY
-    outPhoto = inPhoto.copy()
     outPhoto = outPhoto.filter(ImageFilter.CONTOUR)
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 #경계선추출
 def func_contour() :        
     global root, canvas, inPhoto, outPhoto, inX, inY
-    outPhoto = inPhoto.copy()
     outPhoto = outPhoto.filter(ImageFilter.FIND_EDGES)
     outX = outPhoto.width
     outY = outPhoto.height
-    inPhoto = outPhoto
     displayPhoto(outPhoto, outX, outY)
 
 ## 전역 변수 선언 부분 ##
 root, canvas = None, None
 inPhoto, outPhoto = None, None
 inX, inY = 0, 0
-
+outX, outY = 0, 0
 
 ## 메인 코드 부분 ##
 root = Tk()
+
 root.geometry("500x500")
 root.resizable(width=FALSE, height=FALSE)
 root.title("포토 에디터")
@@ -185,10 +169,4 @@ effectMenu.add_separator()
 effectMenu.add_command(label = "연필 스케치", command = func_sketch)
 effectMenu.add_command(label = "경계선 추출", command = func_contour)
 
-
-
-#실습1
-#상단 메뉴 생성하기
-
 root.mainloop()
-
